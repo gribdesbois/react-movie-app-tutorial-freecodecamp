@@ -7,3 +7,31 @@ body {
 	overflow-x: auto;
 	flex-wrap: nowrap;
 }
+
+
+.true-image-container{
+	position: relative;
+	transition: transform 0.3s;
+}
+
+.true-image-container:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
+.true-image-container:hover .overlay {
+	opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.overlay  {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+	width: 100%;
+	opacity: 0;
+	bottom: 0;
+	font-size: 20px;
+	padding: 20px;
+	text-align: center;
+}
