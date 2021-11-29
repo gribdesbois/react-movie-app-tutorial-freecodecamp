@@ -7,6 +7,7 @@ import MovieList from './components/MovieList/MovieList'
 import MovieListHeading from './components/MovieList/MovieListHeading'
 import SearchBox from './components/Search/SearchBox'
 import AddFavourite from './components/Favourites/AddFavourite'
+import RemoveFavourites from './components/Favourites/RemoveFavourites'
 
 /* dotenv.config() */
 const {OMDBAPI, IDENTIFIER, APIKEY} = env
@@ -27,8 +28,15 @@ function App() {
     }
   }
 
-  const AddFavouriteMovie = (movie) => {
+  const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie]
+    setFavourites(newFavouriteList)
+  }
+
+  const removeFavouriteMovie = (movie) => {
+    const newFavouriteList = favourites.filter(
+      (favourite) => favourite.imdbID !== movie.imdbID
+    )
     setFavourites(newFavouriteList)
   }
 
@@ -46,14 +54,18 @@ function App() {
         <MovieList 
           movies={movies} 
           favouriteComponent={AddFavourite}
-          handleFavouritesClick={AddFavouriteMovie}
+          handleFavouritesClick={addFavouriteMovie}
         />
       </div>
       <div className='row d-flex align-items-center mt-4 mb-4'>
         <MovieListHeading heading='Favourites' />
       </div>
       <div className='row'>
-        <MovieList movies={favourites} favouriteComponent={AddFavourite} />
+        <MovieList 
+          movies={favourites} 
+          handleFavouritesClick={removeFavouriteMovie}
+          favouriteComponent={RemoveFavourites} 
+        />
       </div> 
     </div>
   )
